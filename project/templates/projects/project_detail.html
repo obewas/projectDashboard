@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}{{ project.name }}{% endblock %}
+
+{% block content %}
+<h2>{{ project.name }}</h2>
+<p><strong>Status:</strong> {{ project.get_status_display }}</p>
+<p><strong>Objective:</strong></p>
+<p>{{ project.objective }}</p>
+<p><strong>Duration (Days):</strong> {{ project.duration_in_days }}</p>
+
+<a href="{% url 'project_update' project.pk %}" class="btn btn-warning">Edit</a>
+<a href="{% url 'project_delete' project.pk %}" class="btn btn-danger">Delete</a>
+<a href="{% url 'project_list' %}" class="btn btn-secondary">Back to List</a>
+{% endblock %}

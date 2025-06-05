@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}Project List{% endblock %}
+
+{% block content %}
+    <p style="font-size: large;">List of Portfolio Projects</p>
+    <a href="{% url 'export_projects_excel' %}" class="btn btn-success mb-3">
+        Export Projects to Excel
+    </a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Project Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Completion</th>
+                <th>Budget</th>
+                <th>Health</th>
+                <th>Created</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for project in projects %}
+            <tr>
+                <td>{{ project.project_name }}</td>
+                <td>{{ project.start_date }}</td>
+                <td>{{ project.end_date }}</td>
+                <td>{{ project.completion_rate }}%</td>
+                <td>{{ project.budget|floatformat:0|intcomma }}</td>
+                <td>{{ project.status }}</td>
+                <td>{{ project.created }}</td>
+                <td><a href="{% url 'project_detail' project.pk %}">Details</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
